@@ -11,7 +11,7 @@
                     <v-list-item
                             v-for="item in items"
                             :key="item.text"
-                            @click=""
+                            :to="item.to"
                     >
                         <v-list-item-action>
                             <v-icon>{{ item.icon }}</v-icon>
@@ -97,11 +97,10 @@
         data: () => ({
             drawer: null,
             items: [
-                {icon: 'fastfood', text: '주변 식당 리스트'},
-                {icon: 'library_books', text: '식당 메뉴 리스트'},
-                {icon: 'history', text: 'History'},
-                {icon: 'featured_play_list', text: 'Playlists'},
-                {icon: 'watch_later', text: 'Watch Later'},
+                {icon: 'fastfood', text: '주변 식당 리스트', to: '/restaurant/restaurantlist'},
+                {icon: 'library_books', text: '식당 메뉴 리스트', to: '/menu/menulist'},
+                {icon: 'dashboard', text: '식당 추천 대시보드', to: '/dashboard'},
+                {icon: 'folder', text: '파일추가', to: '/file'}
             ],
             items2: [
                 {picture: 28, text: 'YY'}

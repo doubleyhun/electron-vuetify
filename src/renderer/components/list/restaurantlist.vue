@@ -35,11 +35,10 @@
                 :headers="headers"
                 :items="this.restaurantListData"
                 :loading="true"
-                :disable-initial-sort="false"
                 :no-data-text="noDataText"
-                :rows-per-page-items="rowsPerPageItems"
-                :pagination.sync="pagination"
-                :total-items="this.pagination.totalItems"
+                :items-per-page-options="rowsPerPageItems"
+                :options.sync="options"
+                :server-items-length="this.options.totalItems"
                 class="elevation-1">
             <v-progress-linear v-show="linerKey" slot="progress" color="blue" indeterminate></v-progress-linear>
             <template slot="items" slot-scope="props">
@@ -65,7 +64,7 @@
     export default {
         name: 'restaurantlist',
         watch: {
-            pagination: {
+            options: {
                 handler() {
                     this.getRestaurantListData()
                 },
@@ -81,14 +80,14 @@
         methods: {
             getRestaurantListData() {
               /*  let pageParam = {
-                    page: this.pagination.page - 1,
-                    pagesize: this.pagination.rowsPerPage,
-                    desc: (this.pagination.sortBy ? (this.pagination.descending ? 'desc' : 'asc') : null),
-                    sortName: (this.pagination.sortBy ? this.pagination.sortBy : null)
+                    page: this.options.page - 1,
+                    pagesize: this.options.rowsPerPage,
+                    desc: (this.options.sortBy ? (this.options.descending ? 'desc' : 'asc') : null),
+                    sortName: (this.options.sortBy ? this.options.sortBy : null)
                 }
                 this.$store.dispatch('immigration-list/immigration-list-module/getImmigrationListData', pageParam).then((response) => {
                     this.restaurantListData = response.data.map[0]
-                    this.pagination.totalItems = response.data.pageInfo.totalCount
+                    this.options.totalItems = response.data.pageInfo.totalCount
                 }).catch((ex) => {
                     console.log('error', ex)
                 })*/
@@ -171,7 +170,7 @@
                 selectRestInfo: null,
                 selectRestName: null,
                 rowsPerPageItems: [10, 20, 30, 40, 50, 100],
-                pagination: {
+                options: {
                     rowsPerPage: 30
                 },
                 restaurantListData: []
